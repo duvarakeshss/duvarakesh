@@ -62,8 +62,9 @@ const Contact = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-[#00FFC6]/5 to-[#FF3CAC]/5"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-[#00FFC6] sm:text-4xl">
-            Contact Me
+          <h2 className="text-3xl font-extrabold sm:text-4xl">
+            <span className="text-white">Contact</span>{' '}
+            <span className="text-[#00FFC6]">Me</span>
           </h2>
           <p className="mt-4 text-lg text-gray-300">
             Let&apos;s work together on your next project
