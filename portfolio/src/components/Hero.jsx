@@ -27,7 +27,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="pt-20 relative overflow-hidden min-h-screen flex flex-col justify-center">
+    <section id="home" className="pt-0 relative overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Rich dark background with subtle gradients */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -40,9 +40,9 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[linear-gradient(45deg,_transparent_25%,_rgba(0,255,198,0.03)_50%,_transparent_75%)] bg-[length:250%_250%] animate-gradient"></div>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative flex-grow">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-24 relative flex-grow flex items-center justify-center">
         <motion.div 
-          className="text-center"
+          className="text-center w-full"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -96,7 +96,7 @@ const Hero = () => {
           </motion.p>
 
           <motion.div 
-            className="mt-8 flex justify-center md:mt-10"
+            className="mt-6 md:mt-10 flex justify-center"
             variants={itemVariants}
           >
             <motion.div 
