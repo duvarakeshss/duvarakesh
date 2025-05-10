@@ -174,26 +174,26 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            About <span className="bg-gradient-to-r from-[#00FFC6] via-[#39FF14] to-[#00FFC6] bg-clip-text text-transparent">Me</span>
+            About <span className="text-[#00FFC6]">Me</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Photo Section */}
-          <div className="relative">
+          <div className="relative flex justify-center">
             <div 
               ref={imageRef}
-              className="relative w-full max-w-[300px] aspect-square mx-auto"
+              className="relative w-full max-w-[250px] aspect-square mx-auto"
             >
               <div 
                 ref={glowRef}
-                className="absolute -inset-1 bg-gradient-to-r from-[#FF3CAC] via-[#39FF14] to-[#00FFC6] rounded-lg blur"
+                className="absolute -inset-1 bg-gradient-to-r from-[#FF3CAC] via-[#00FFC6] to-[#00FFC6] rounded-lg blur-md opacity-30"
               />
               <div 
                 ref={borderRef}
-                className="absolute -left-1 top-0 bottom-0 bg-gradient-to-b from-[#39FF14] to-[#00FFC6] rounded-l-lg"
+                className="absolute -left-1 top-0 bottom-0 bg-gradient-to-b from-[#00FFC6] to-[#00FFC6] rounded-l-lg"
               />
-              <div className="absolute inset-0 bg-[#39FF14]/20 rounded-lg" />
+              <div className="absolute inset-0 bg-[#00FFC6]/10 rounded-lg" />
               <img 
                 src="/Duvarakesh S S.jpg" 
                 alt="Profile" 
@@ -211,7 +211,7 @@ const About = () => {
             className="space-y-8"
           >
             <h3 ref={titleRef} className="text-3xl font-bold">
-              <span className="bg-gradient-to-r from-[#00FFC6] via-[#39FF14] to-[#00FFC6] bg-clip-text text-transparent">
+              <span className="text-[#00FFC6]">
                 Full Stack Developer
               </span>
             </h3>
@@ -223,19 +223,47 @@ const About = () => {
                 I enjoy transforming ideas into practical solutions, with a focus on performance, clarity, and user experience.
               </p>
             </div>
-            <motion.a
-              href="/Duvarakesh S S.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-8 px-10 py-4 text-lg bg-gradient-to-r from-[#00FFC6] to-[#39FF14] text-black font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 0 20px rgba(57, 255, 20, 0.5)"
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Download Resume
-            </motion.a>
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+              <motion.div
+                className="rounded-md inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.a
+                  href="/Duvarakesh S S.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-6 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 sm:px-8 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(0, 255, 198, 0.2)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">Download Resume</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FFC6]/0 via-[#00FFC6]/10 to-[#00FFC6]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                </motion.a>
+              </motion.div>
+              
+              <motion.div
+                className="rounded-md inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.a
+                  href="#contact"
+                  className="flex items-center justify-center px-6 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 sm:px-8 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(0, 255, 198, 0.2)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">Contact Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FFC6]/0 via-[#00FFC6]/10 to-[#00FFC6]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                </motion.a>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

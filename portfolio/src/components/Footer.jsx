@@ -5,15 +5,17 @@ const Footer = () => {
     <footer className="bg-[#1F1F1F] relative overflow-hidden border-t border-[#00FFC6]/10">
       <div className="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/5 to-[#00FFC6]/5"></div>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <div className="flex space-x-6">
+        <div className="flex flex-col items-center justify-center space-y-8">
+          
+          <div className="flex flex-wrap justify-center gap-6">
             <a
-              href="#"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300"
+              href="https://github.com/duvarakeshss"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
             >
-              <span className="sr-only">GitHub</span>
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -24,14 +26,16 @@ const Footer = () => {
                   clipRule="evenodd"
                 />
               </svg>
+              <span>GitHub</span>
             </a>
             <a
-              href="#"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300"
+              href="https://www.linkedin.com/in/duvarakesh-s-s-5b64bb24a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
             >
-              <span className="sr-only">LinkedIn</span>
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -42,24 +46,39 @@ const Footer = () => {
                   clipRule="evenodd"
                 />
               </svg>
+              <span>LinkedIn</span>
             </a>
             <a
-              href="#"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300"
+              href="mailto:duvarakesh05@gmail.com"
+              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
             >
-              <span className="sr-only">Twitter</span>
-              <svg
-                className="h-6 w-6"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+              <svg 
+                className="h-5 w-5" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
               >
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
               </svg>
+              <span>duvarakesh05@gmail.com</span>
+            </a>
+            <a
+              href="tel:+916369894022"
+              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
+            >
+              <svg 
+                className="h-5 w-5" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
+              >
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+              </svg>
+              <span>+91 6369894022</span>
             </a>
           </div>
+          
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
+            Duvarakesh S S. All rights reserved © 2025.
           </p>
         </div>
       </div>
