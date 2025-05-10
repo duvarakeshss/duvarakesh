@@ -29,7 +29,7 @@ const Projects = () => {
       image: '/chess.png',
       tags: ['JavaScript', 'Three.js', 'WebGL', 'Game Development'],
       github: 'https://github.com/duvarakeshss/Chess',
-      demo: 'https://chess.duvarakesh.xyz/',
+      demo: 'https://chess-3d.duvarakesh.xyz/',
     },
     {
       title: 'Multi Agent Seo Generator',
