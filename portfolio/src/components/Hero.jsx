@@ -27,7 +27,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="pt-20 relative overflow-hidden">
+    <section id="home" className="pt-20 relative overflow-hidden min-h-screen flex flex-col justify-center">
       {/* Rich dark background with subtle gradients */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -40,7 +40,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[linear-gradient(45deg,_transparent_25%,_rgba(0,255,198,0.03)_50%,_transparent_75%)] bg-[length:250%_250%] animate-gradient"></div>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative flex-grow">
         <motion.div 
           className="text-center"
           variants={containerVariants}
@@ -76,14 +76,15 @@ const Hero = () => {
                 'Machine Learning Developer',
                 1000,
                 'Problem Solver',
-                1000,
+                1000, 
                 'Creative Developer',
                 1000,
               ]}
-              wrapper="span"
+              wrapper="div"
               speed={50}
-              className="bg-gradient-to-r from-[#00FFC6] via-[#00E676] to-[#00FFC6] bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x font-mono tracking-wider text-xl sm:text-2xl md:text-3xl font-semibold"
+              className="bg-gradient-to-r from-[#00FFC6] via-[#00E676] to-[#00FFC6] bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-x font-mono tracking-wider text-xl sm:text-2xl md:text-3xl font-semibold min-h-[1.5em]"
               repeat={Infinity}
+              cursor={true}
             />
           </motion.div>
 
@@ -95,7 +96,7 @@ const Hero = () => {
           </motion.p>
 
           <motion.div 
-            className="mt-5 flex justify-center md:mt-8"
+            className="mt-8 flex justify-center md:mt-10"
             variants={itemVariants}
           >
             <motion.div 
@@ -105,7 +106,7 @@ const Hero = () => {
             >
               <motion.a 
                 href="#contact" 
-                className="flex items-center justify-center w-full px-5 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 sm:px-8 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
+                className="flex items-center justify-center w-full px-6 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 sm:px-8 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 0 20px rgba(0, 255, 198, 0.2)"
