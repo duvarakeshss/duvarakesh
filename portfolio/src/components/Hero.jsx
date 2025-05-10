@@ -95,17 +95,17 @@ const Hero = () => {
           </motion.p>
 
           <motion.div 
-            className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8"
+            className="mt-5 flex justify-center md:mt-8"
             variants={itemVariants}
           >
             <motion.div 
-              className="rounded-md"
+              className="rounded-md inline-block w-auto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <motion.a 
                 href="#contact" 
-                className="w-full flex items-center justify-center px-8 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
+                className="flex items-center justify-center w-full px-5 py-3 border border-[#00FFC6] text-base font-medium rounded-md text-[#00FFC6] hover:bg-[#00FFC6]/10 transition-all duration-300 sm:px-8 md:py-4 md:text-lg md:px-10 relative overflow-hidden group"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 0 20px rgba(0, 255, 198, 0.2)"
