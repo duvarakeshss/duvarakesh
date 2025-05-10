@@ -24,30 +24,60 @@ const Contact = () => {
     e.preventDefault();
     setStatus(prevStatus => ({ ...prevStatus, submitting: true }));
 
-    // This will be used when the site is deployed to duvarakesh.xyz
-    // The form will submit directly to the server without JavaScript
-    // For local development, we'll use this code below
+    const formUrl = `https://formsubmit.co/${encodeURIComponent("duvarakesh05@gmail.com")}`;
 
     try {
-      // Simulate form submission for local development
+      // Create a hidden form element to submit the data
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = formUrl;
+      form.target = '_blank';
+      form.style.display = 'none';
+
+      // Add each field to the form
+      const nameField = document.createElement('input');
+      nameField.name = 'name';
+      nameField.value = formData.name;
+      form.appendChild(nameField);
+
+      const emailField = document.createElement('input');
+      emailField.name = 'email';
+      emailField.value = formData.email;
+      form.appendChild(emailField);
+
+      const messageField = document.createElement('input');
+      messageField.name = 'message';
+      messageField.value = formData.message;
+      form.appendChild(messageField);
+
+      // Add a redirect URL to come back to the site
+      const redirectField = document.createElement('input');
+      redirectField.name = '_next';
+      redirectField.value = window.location.href;
+      form.appendChild(redirectField);
+
+      // Append form to body, submit it, and remove it
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+
+      // Reset form and set success status
+      setFormData({ name: '', email: '', message: '' });
+      setStatus({
+        submitted: true,
+        submitting: false,
+        info: { error: false, msg: "Message sent successfully!" }
+      });
+
+      // Reset status message after 5 seconds
       setTimeout(() => {
-        // Reset form and set success status
-        setFormData({ name: '', email: '', message: '' });
         setStatus({
-          submitted: true,
+          submitted: false,
           submitting: false,
-          info: { error: false, msg: "Message sent successfully!" }
+          info: { error: false, msg: null }
         });
-        
-        // Reset status message after 5 seconds
-        setTimeout(() => {
-          setStatus({
-            submitted: false,
-            submitting: false,
-            info: { error: false, msg: null }
-          });
-        }, 5000);
-      }, 1000);
+      }, 5000);
+
     } catch (error) {
       setStatus({
         submitted: false,
@@ -72,17 +102,7 @@ const Contact = () => {
         </div>
 
         <div className="mt-16 max-w-lg mx-auto">
-          {/* 
-            When deployed to duvarakesh.xyz, this form will submit to the server.
-            For local development/preview, the onSubmit handler will prevent default submission
-            and show a success message.
-          */}
-          <form 
-            className="space-y-6" 
-            onSubmit={handleSubmit}
-            method="POST"
-            action="/api/contact"
-          >
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {status.info.msg && (
               <div className={`p-4 rounded-md ${status.info.error ? 'bg-red-500/20 text-red-300' : 'bg-green-500/20 text-green-300'}`}>
                 {status.info.msg}
@@ -95,7 +115,6 @@ const Contact = () => {
               <input
                 type="text"
                 id="name"
-                name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -109,7 +128,6 @@ const Contact = () => {
               <input
                 type="email"
                 id="email"
-                name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -122,7 +140,6 @@ const Contact = () => {
               </label>
               <textarea
                 id="message"
-                name="message"
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
