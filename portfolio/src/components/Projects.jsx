@@ -50,11 +50,21 @@ const Projects = () => {
   ];
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === projects.length - 1 ? 0 : prevIndex + 1));
+    if (currentIndex === projects.length - 1) {
+      // Smoothly animate to first slide
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(prevIndex => prevIndex + 1);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? projects.length - 1 : prevIndex - 1));
+    if (currentIndex === 0) {
+      // Smoothly animate to last slide
+      setCurrentIndex(projects.length - 1);
+    } else {
+      setCurrentIndex(prevIndex => prevIndex - 1);
+    }
   };
 
   const goToSlide = (index) => {
@@ -111,8 +121,15 @@ const Projects = () => {
           <div ref={carouselRef} className="overflow-hidden">
             <motion.div 
               className="flex"
-              animate={{ x: `calc(-${currentIndex * 100}%)` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              animate={{ 
+                x: `calc(-${currentIndex * 100}%)`,
+              }}
+              transition={{ 
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                duration: 0.5
+              }}
             >
               {projects.map((project, index) => (
                 <div 
@@ -179,7 +196,7 @@ const Projects = () => {
                                 whileTap={{ scale: 0.95 }}
                               >
                                 <FaExternalLinkAlt className="w-4 h-4 mr-2" />
-                                Live Demo
+                                View Site
                               </motion.span>
                             </a>
                           )}
