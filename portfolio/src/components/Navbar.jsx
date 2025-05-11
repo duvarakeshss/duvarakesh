@@ -13,7 +13,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'projects', 'contact']
-      const scrollPosition = window.scrollY + 100 // Offset for better detection
+      const scrollPosition = window.scrollY + 100 
 
       for (const section of sections) {
         const element = document.getElementById(section)
@@ -81,7 +81,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Link to="/" className="text-[#00FFC6] text-xl font-bold relative group">
-              <span className="relative z-10">Portfolio</span>
+              <span className="relative z-10">Duvarakesh</span>
               <span className="absolute inset-0 bg-gradient-to-r from-[#00FFC6]/20 via-[#00FFC6]/20 to-[#00FFC6]/20 rounded-lg transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
             </Link>
           </motion.div>
