@@ -88,13 +88,13 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#0D0D0D] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#00FFC6]/5 to-[#FF3CAC]/5"></div>
+    <section id="contact" className="py-20 bg-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold sm:text-4xl">
             <span className="text-white">Contact</span>{' '}
-            <span className="text-[#00FFC6]">Me</span>
+            <span className="bg-gradient-to-r from-[#6366F1] to-[#A855F7] bg-clip-text text-transparent">Me</span>
           </h2>
           <p className="mt-4 text-lg text-gray-300">
             Let&apos;s work together on your next project
@@ -118,7 +118,7 @@ const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full bg-[#1F1F1F] border border-[#00FFC6]/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00FFC6] focus:border-transparent"
+                className="mt-1 block w-full bg-slate-800 border border-purple-500/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
               />
             </div>
             <div>
@@ -131,7 +131,7 @@ const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full bg-[#1F1F1F] border border-[#00FFC6]/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00FFC6] focus:border-transparent"
+                className="mt-1 block w-full bg-slate-800 border border-purple-500/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
               />
             </div>
             <div>
@@ -144,17 +144,17 @@ const Contact = () => {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="mt-1 block w-full bg-[#1F1F1F] border border-[#00FFC6]/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#00FFC6] focus:border-transparent"
+                className="mt-1 block w-full bg-slate-800 border border-purple-500/20 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
               ></textarea>
             </div>
             <div>
               <button
                 type="submit"
                 disabled={status.submitting}
-                className="w-full flex justify-center py-3 px-4 border border-[#00FFC6] rounded-md shadow-sm text-sm font-medium text-[#00FFC6] bg-transparent hover:bg-[#00FFC6]/10 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden group"
+                className="w-full flex justify-center py-3 px-4 border border-purple-400 rounded-md shadow-sm text-sm font-medium text-purple-400 bg-transparent hover:bg-purple-400/10 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed relative overflow-hidden group"
               >
                 <span className="relative z-10">{status.submitting ? 'Sending...' : 'Send Message'}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#00FFC6]/0 via-[#00FFC6]/10 to-[#00FFC6]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-400/0 via-purple-400/10 to-purple-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               </button>
             </div>
           </form>

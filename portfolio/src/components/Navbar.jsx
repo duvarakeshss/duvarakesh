@@ -12,7 +12,7 @@ const Navbar = () => {
   // Track scroll position to highlight the current section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'contact']
+      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
       const scrollPosition = window.scrollY + 100 
 
       for (const section of sections) {
@@ -41,25 +41,62 @@ const Navbar = () => {
 
   const handleNavigation = (path, sectionId) => {
     setMenuOpen(false)
-    if (location.pathname === '/') {
+
+    // Add a subtle loading animation with enhanced feedback
+    const button = document.activeElement
+    if (button) {
+      button.style.transform = 'scale(0.95)'
+      button.style.transition = 'transform 0.15s ease'
+      setTimeout(() => {
+        button.style.transform = ''
+      }, 150)
+    }
+
+    // Add a brief loading state
+    const navElement = document.querySelector('.navbar-transition')
+    if (navElement) {
+      navElement.style.opacity = '0.7'
+      setTimeout(() => {
+        navElement.style.opacity = '1'
+      }, 300)
+    }
+
+    if (location.pathname === '/' && path === '/') {
+      // Same page navigation with enhanced smooth scrolling
       const element = document.getElementById(sectionId)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest'
+        })
       }
-    } else {
+    } else if (location.pathname === '/' && path !== '/') {
+      // Navigate to different route from home with transition timing
+      navigate(path)
+    } else if (location.pathname !== '/' && path === '/') {
+      // Navigate back to home with proper timing for page transition
       navigate('/')
       setTimeout(() => {
         const element = document.getElementById(sectionId)
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          })
         }
-      }, 100)
+      }, 600) // Increased delay to sync with enhanced page transition
+    } else {
+      // Different route to different route with transition timing
+      navigate(path)
     }
   }
 
   const navLinks = [
     { path: '/', sectionId: 'home', label: 'Home' },
     { path: '/about', sectionId: 'about', label: 'About' },
+    { path: '/experience', sectionId: 'experience', label: 'Experience' },
     { path: '/skills', sectionId: 'skills', label: 'Skills' },
     { path: '/projects', sectionId: 'projects', label: 'Projects' },
     { path: '/contact', sectionId: 'contact', label: 'Contact' }
@@ -70,19 +107,26 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="fixed top-0 left-0 right-0 bg-[#1F1F1F]/90 backdrop-blur-sm z-50 border-b border-[#00FFC6]/10"
+      className="fixed top-0 left-0 right-0 bg-[#0c0c1d]/90 backdrop-blur-sm z-50 navbar-transition"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             className="flex items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link to="/" className="text-[#00FFC6] text-xl font-bold relative group">
-              <span className="relative z-10">Duvarakesh</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#00FFC6]/20 via-[#00FFC6]/20 to-[#00FFC6]/20 rounded-lg transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+            <Link to="/" className="flex items-center">
+              <img
+                src="/dk-logo.svg"
+                alt="DK Logo"
+                className="w-10 h-10 mr-2"
+              />
+              <span className="text-cyan-400 text-xl font-bold relative group hidden sm:block">
+                <span className="relative z-10">Duvarakesh</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-cyan-400/20 to-cyan-400/20 rounded-lg transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </span>
             </Link>
           </motion.div>
 
@@ -96,11 +140,11 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className={`relative z-10 ${isActive(item.sectionId) ? 'text-[#00FFC6]' : 'text-gray-300 group-hover:text-[#00FFC6]'}`}>
+                <span className={`relative z-10 ${isActive(item.sectionId) ? 'text-cyan-400 font-medium' : 'text-slate-300 hover:text-cyan-400 transition-colors'}`}>
                   {item.label}
                 </span>
                 <motion.span
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-[#00FFC6]"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400"
                   initial={{ scaleX: 0 }}
                   animate={{ 
                     scaleX: isActive(item.sectionId) ? 1 : 0,
@@ -109,7 +153,7 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <motion.span
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-[#00FFC6]"
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-400"
                   initial={{ scaleX: 0 }}
                   whileHover={{ 
                     scaleX: 1,
@@ -119,7 +163,7 @@ const Navbar = () => {
                   transition={{ duration: 0.3 }}
                 />
                 <motion.span
-                  className="absolute inset-0 bg-[#00FFC6]/5 rounded-md"
+                  className="absolute inset-0 bg-cyan-400/5 rounded-md"
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: isActive(item.sectionId) ? 0.1 : 0
@@ -133,12 +177,20 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button
+            <motion.button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-300 hover:text-[#00FFC6] focus:outline-none"
+              className="text-slate-300 hover:text-cyan-400 focus:outline-none p-2 rounded-md hover:bg-cyan-400/10 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              <motion.div
+                animate={{ rotate: menuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {menuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </div>
@@ -150,7 +202,7 @@ const Navbar = () => {
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden bg-[#1F1F1F]/95 backdrop-blur-sm border-t border-[#00FFC6]/10 px-4 py-4 space-y-2"
+          className="md:hidden bg-[#0c0c1d]/95 backdrop-blur-sm px-4 py-4 space-y-2"
         >
           {navLinks.map((item) => (
             <motion.button
@@ -160,11 +212,11 @@ const Navbar = () => {
               whileHover={{ x: 5 }}
               transition={{ duration: 0.2 }}
             >
-              <span className={`relative z-10 ${isActive(item.sectionId) ? 'text-[#00FFC6]' : 'text-gray-300'}`}>
+              <span className={`relative z-10 ${isActive(item.sectionId) ? 'text-cyan-400' : 'text-slate-300'}`}>
                 {item.label}
               </span>
               <motion.span 
-                className="absolute left-0 top-0 bottom-0 w-1 bg-[#00FFC6]"
+                className="absolute left-0 top-0 bottom-0 w-1 bg-cyan-400"
                 initial={{ scaleY: 0 }}
                 animate={{ 
                   scaleY: isActive(item.sectionId) ? 1 : 0,
@@ -172,7 +224,7 @@ const Navbar = () => {
                 transition={{ duration: 0.3 }}
               />
               <motion.span
-                className="absolute inset-0 bg-[#00FFC6]/5"
+                className="absolute inset-0 bg-cyan-400/5"
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: isActive(item.sectionId) ? 0.1 : 0

@@ -2,17 +2,17 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1F1F1F] relative overflow-hidden border-t border-[#00FFC6]/10">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/5 to-[#00FFC6]/5"></div>
+    <footer className="bg-[#0c0c1d]/90 backdrop-blur-sm relative overflow-hidden border-t border-purple-500/10">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/3 to-pink-500/3"></div>
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col items-center justify-center space-y-8">
-          
+
           <div className="flex flex-wrap justify-center gap-6">
             <a
               href="https://github.com/duvarakeshss"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
+              className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center gap-2"
             >
               <svg
                 className="h-5 w-5"
@@ -32,7 +32,7 @@ const Footer = () => {
               href="https://www.linkedin.com/in/duvarakesh-s-s-5b64bb24a/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
+              className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center gap-2"
             >
               <svg
                 className="h-5 w-5"
@@ -50,7 +50,7 @@ const Footer = () => {
             </a>
             <a
               href="mailto:duvarakesh05@gmail.com"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
+              className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center gap-2"
             >
               <svg 
                 className="h-5 w-5" 
@@ -64,7 +64,7 @@ const Footer = () => {
             </a>
             <a
               href="tel:+916369894022"
-              className="text-gray-400 hover:text-[#00FFC6] transition-colors duration-300 flex items-center gap-2"
+              className="text-gray-400 hover:text-purple-400 transition-colors duration-300 flex items-center gap-2"
             >
               <svg 
                 className="h-5 w-5" 

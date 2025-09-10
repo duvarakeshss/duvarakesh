@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const carouselRef = useRef(null);
-  
   const projects = [
     {
       title: 'Academia',
@@ -21,15 +18,15 @@ const Projects = () => {
       image: '/nimora.png',
       tags: ['JavaScript', 'React', 'FastAPI'],
       github: 'https://github.com/duvarakeshss/Nimora',
-      demo: 'https://nimora.duvarakesh.xyz/',
+      demo: 'https://nimora.dktech.app/',
     },
     {
-      title: 'Chess 3D',
+      title: 'ChessMaster',
       description: 'An immersive 3D chess game with realistic graphics and animations. Features include multiplayer support, various difficulty levels, and game analytics.',
       image: '/chess.png',
-      tags: ['JavaScript', 'Three.js', 'WebGL', 'Game Development'],
+      tags: ['JavaScript', 'Three.js', 'WebGL'],
       github: 'https://github.com/duvarakeshss/Chess',
-      demo: 'https://chess-3d.duvarakesh.xyz/',
+      demo: 'https://chessmaster.dktech.app/',
     },
     {
       title: 'Multi Agent Seo Generator',
@@ -49,177 +46,125 @@ const Projects = () => {
     },
   ];
 
-  const nextSlide = () => {
-    if (currentIndex === projects.length - 1) {
-      // Smoothly animate to first slide
-      setCurrentIndex(0);
-    } else {
-      setCurrentIndex(prevIndex => prevIndex + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex === 0) {
-      // Smoothly animate to last slide
-      setCurrentIndex(projects.length - 1);
-    } else {
-      setCurrentIndex(prevIndex => prevIndex - 1);
-    }
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
-
-  // Auto-slide effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
   return (
-    <section id="projects" className="py-20 bg-[#1F1F1F] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FF3CAC]/5 to-[#00FFC6]/5"></div>
+    <section id="projects" className="py-12 sm:py-20 bg-slate-950 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-[#00FFC6] sm:text-4xl">
-            Projects
+          <h2 className="text-2xl sm:text-3xl font-extrabold lg:text-4xl">
+            <span className="text-white">My</span>{' '}
+            <span className="bg-gradient-to-r from-[#6366F1] to-[#A855F7] bg-clip-text text-transparent">Projects</span>
           </h2>
-          <p className="mt-4 text-lg text-gray-300">
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-300 px-4">
             Here are some of my recent works
           </p>
         </div>
 
-        <div className="mt-16 relative">
-          {/* Carousel Navigation */}
-          <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10">
-            <button
-              onClick={prevSlide}
-              className="p-2 rounded-full bg-[#0D0D0D]/80 text-[#00FFC6] hover:bg-[#00FFC6]/20 transition-colors duration-300"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-          </div>
-          
-          <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10">
-            <button
-              onClick={nextSlide}
-              className="p-2 rounded-full bg-[#0D0D0D]/80 text-[#00FFC6] hover:bg-[#00FFC6]/20 transition-colors duration-300"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+        <div className="mt-8 sm:mt-16">
+          {/* Projects Grid - Optimized for Mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative"
+              >
+                <div className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-purple-500/10 hover:border-purple-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10 active:scale-95 sm:active:scale-100">
+                  {/* Image Container - Responsive Height */}
+                  <div className="relative overflow-hidden h-40 sm:h-48">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://picsum.photos/400/300?random=' + index;
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300"></div>
 
-          {/* Carousel Container */}
-          <div ref={carouselRef} className="overflow-hidden">
-            <motion.div 
-              className="flex"
-              animate={{ 
-                x: `calc(-${currentIndex * 100}%)`,
-              }}
-              transition={{ 
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-                duration: 0.5
-              }}
-            >
-              {projects.map((project, index) => (
-                <div 
-                  key={project.title}
-                  className="min-w-full px-4"
-                >
-                  <div className="bg-[#0D0D0D] rounded-lg overflow-hidden shadow-lg border border-[#00FFC6]/10 hover:border-[#00FFC6]/30 transition-all duration-300 group">
-                    <div className="flex flex-col md:flex-row">
-                      <div className="relative overflow-hidden md:w-1/2">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-64 md:h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-                          onError={(e) => {
-                            e.target.src = 'https://picsum.photos/400/300?random=' + index;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] to-transparent opacity-70"></div>
-                      </div>
-                      <div className="p-6 md:w-1/2 flex flex-col justify-between">
-                        <div>
-                          <h3 className="text-2xl font-bold text-[#00FFC6] mb-4">
-                            {project.title}
-                          </h3>
-                          <p className="text-gray-300 mb-6 text-lg">{project.description}</p>
-                          <div className="flex flex-wrap gap-2 mb-6">
-                            {project.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-3 py-1 text-sm bg-[#1F1F1F] text-[#00FFC6] rounded-full"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="flex space-x-4">
+                    {/* Overlay Content - Mobile Optimized */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 transition-all duration-300 bg-slate-950/80 backdrop-blur-sm p-4">
+                      <div className="text-center px-2 sm:px-4">
+                        <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{project.title}</h3>
+                        <div className="flex justify-center space-x-3 sm:space-x-4">
                           <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center text-[#00FFC6] hover:text-[#00FFC6] transition-all duration-300"
+                            className="p-2 sm:p-3 bg-purple-500/20 rounded-full text-purple-300 hover:bg-purple-500/30 transition-colors duration-200 active:scale-90"
                           >
-                            <motion.span 
-                              className="relative z-10 flex items-center"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <FaGithub className="w-5 h-5 mr-2" />
-                              GitHub
-                            </motion.span>
+                            <FaGithub className="w-4 h-4 sm:w-5 sm:h-5" />
                           </a>
-                          
                           {project.demo && (
                             <a
                               href={project.demo}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center text-[#00FFC6] hover:text-[#00FFC6] transition-all duration-300"
+                              className="p-2 sm:p-3 bg-purple-500/20 rounded-full text-purple-300 hover:bg-purple-500/30 transition-colors duration-200 active:scale-90"
                             >
-                              <motion.span 
-                                className="relative z-10 flex items-center"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                              >
-                                <FaExternalLinkAlt className="w-4 h-4 mr-2" />
-                                View Site
-                              </motion.span>
+                              <FaExternalLinkAlt className="w-3 h-3 sm:w-4 sm:h-4" />
                             </a>
                           )}
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
 
-          {/* Indicators */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                  index === currentIndex ? 'bg-[#00FFC6]' : 'bg-gray-500'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              ></button>
+                  {/* Content - Mobile Optimized */}
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-purple-400 mb-2 sm:mb-3 group-hover:text-purple-300 transition-colors duration-300 line-clamp-1">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base leading-relaxed line-clamp-2 sm:line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {/* Tags - Mobile Optimized */}
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 text-xs bg-slate-700 text-purple-300 rounded-full border border-purple-500/20"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <span className="px-2 py-1 text-xs bg-slate-700 text-gray-400 rounded-full">
+                          +{project.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Links - Mobile Optimized */}
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors duration-200 flex items-center gap-2 justify-center sm:justify-start active:scale-95"
+                      >
+                        <FaGithub className="w-4 h-4" />
+                        Code
+                      </a>
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors duration-200 flex items-center gap-2 justify-center sm:justify-start active:scale-95"
+                        >
+                          <FaExternalLinkAlt className="w-4 h-4" />
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
