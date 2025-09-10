@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { HelmetProvider, Helmet } from 'react-helmet-async'
+import { Helmet } from 'react-helmet'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -15,16 +15,14 @@ import PageTransition from './components/PageTransition'
 
 const App = () => {
   return (
-    <HelmetProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="min-h-screen bg-[#0A0A0F]">
-          <Navbar />
-          <AnimatedRoutes />
-          <Footer />
-        </div>
-      </Router>
-    </HelmetProvider>
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen bg-[#0A0A0F]">
+        <Navbar />
+        <AnimatedRoutes />
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
