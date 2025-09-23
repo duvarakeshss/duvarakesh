@@ -201,7 +201,7 @@ const Experience = () => {
         <div className="relative">
           {/* Enhanced Timeline line with animation */}
           <motion.div
-            className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-1 bg-[#8B5CF6] h-full rounded-full shadow-lg"
+            className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-0.5 md:w-1 bg-[#8B5CF6] h-full rounded-full shadow-lg"
             animate={{
               background: [
                 "linear-gradient(to bottom, #8B5CF6, #A855F7)",
@@ -216,7 +216,7 @@ const Experience = () => {
             }}
           />
 
-          <div className="space-y-16">
+          <div className="space-y-8 md:space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
@@ -230,7 +230,7 @@ const Experience = () => {
               >
                 {/* Enhanced Timeline dot with Lottie */}
                 <motion.div
-                  className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-8 h-8 bg-[#8B5CF6] rounded-full border-4 border-[#0c0c1d] z-10 shadow-lg flex items-center justify-center"
+                  className="absolute left-4 md:left-1/2 md:transform md:-translate-x-1/2 w-6 h-6 md:w-8 md:h-8 bg-[#8B5CF6] rounded-full border-2 md:border-4 border-[#0c0c1d] z-10 shadow-lg flex items-center justify-center"
                   animate={{
                     scale: [1, 1.1, 1],
                     boxShadow: [
@@ -266,14 +266,14 @@ const Experience = () => {
 
                 {/* Enhanced Content card */}
                 <motion.div
-                  className={`ml-16 md:ml-0 md:w-5/12 ${
+                  className={`ml-12 md:ml-0 md:w-5/12 w-full max-w-md mx-auto md:mx-0 ${
                     index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
-                  } bg-[#0c0c1d]/60 backdrop-blur-md border border-[#6366F1]/30 rounded-2xl p-8 hover:border-[#6366F1]/60 transition-all duration-300 shadow-2xl relative overflow-hidden`}
+                  } bg-[#0c0c1d]/60 backdrop-blur-md border border-[#6366F1]/30 rounded-2xl p-4 md:p-8 hover:border-[#6366F1]/60 transition-all duration-300 shadow-2xl relative overflow-hidden`}
                 >
                   {/* Subtle Lottie Animation Background */}
-                  <div className="absolute top-4 right-4 w-16 h-16 opacity-10 pointer-events-none">
+                  <div className="absolute top-2 right-2 md:top-4 md:right-4 w-12 h-12 md:w-16 md:h-16 opacity-10 pointer-events-none">
                     <Lottie
-                      animationData={index === 0 ? codingAnimation : webDevAnimation}
+                      animationData={codingAnimation}
                       loop={true}
                       autoplay={true}
                       style={{ width: '100%', height: '100%' }}
@@ -281,76 +281,87 @@ const Experience = () => {
                   </div>
 
                   {/* Header with icon */}
-                  <div className="flex items-start justify-start mb-6">
-                    <div className="flex items-center space-x-4">
+                  <div className="flex items-start justify-start mb-4 md:mb-6">
+                    <div className="flex items-center space-x-3 md:space-x-4 w-full">
                       <motion.div
-                        className="w-12 h-12 bg-[#8B5CF6] rounded-xl flex items-center justify-center text-xl shadow-lg"
+                        className="w-10 h-10 md:w-12 md:h-12 bg-[#8B5CF6] rounded-xl flex items-center justify-center text-lg md:text-xl shadow-lg flex-shrink-0"
                       >
                         {exp.icon}
                       </motion.div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-white mb-1 whitespace-nowrap">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1 truncate">
                           {exp.title}
                         </h3>
-                        <div className="text-white text-sm font-bold mb-2">
+                        <div className="text-white text-sm md:text-base font-bold mb-1 truncate">
                           {exp.company}
                         </div>
-                        <div className="flex items-center text-gray-400 text-sm">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          <span>{exp.location}</span>
+                        <div className="flex items-center text-gray-400 text-xs md:text-sm">
+                          <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 flex-shrink-0" />
+                          <span className="truncate">{exp.location}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Period display - next line */}
-                  <div className="flex items-center gap-2 flex-nowrap mb-6">
-                    <Calendar className="w-4 h-4 text-[#8B5CF6] flex-shrink-0" />
-                    <span className="text-gray-300 text-sm font-medium whitespace-nowrap">
-                      {exp.period}
-                    </span>
+                  {/* Period display - responsive layout */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 mb-4 md:mb-6">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-[#8B5CF6] flex-shrink-0" />
+                      <span className="text-gray-300 text-sm font-medium">
+                        {exp.period}
+                      </span>
+                    </div>
                     {exp.current && (
-                      <span className="inline-flex items-center px-2 py-1 text-xs font-semibold text-[#8B5CF6] bg-[#8B5CF6]/10 rounded-full border border-[#8B5CF6]/20 whitespace-nowrap">
+                      <span className="inline-flex items-center px-2 py-1 text-xs font-semibold text-[#8B5CF6] bg-[#8B5CF6]/10 rounded-full border border-[#8B5CF6]/20 self-start sm:self-center">
                         Current
                       </span>
                     )}
                   </div>
 
                   {/* Description */}
-                  <div className="mb-6">
-                    <ul className="space-y-3">
+                  <div className="mb-4 md:mb-6">
+                    <ul className="space-y-2 md:space-y-3">
                       {exp.description.map((item, itemIndex) => (
                         <motion.li
                           key={itemIndex}
-                          className="text-gray-300 text-sm leading-relaxed flex items-start"
+                          className="text-gray-300 text-sm md:text-base leading-relaxed flex items-start"
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.4, delay: itemIndex * 0.1 }}
                           viewport={{ once: true }}
                         >
-                          <span className="text-[#8B5CF6] mr-3 mt-1 flex-shrink-0 text-lg">▹</span>
-                          <span>{item}</span>
+                          <span className="text-[#8B5CF6] mr-2 md:mr-3 mt-1 flex-shrink-0 text-base md:text-lg">▹</span>
+                          <span className="flex-1">{item}</span>
                         </motion.li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Technologies - inline with hover effects */}
+                  {/* Technologies - responsive layout */}
                   <motion.div
                     className="mt-4 text-sm text-gray-300"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <motion.span
-                      className="text-[#8B5CF6] font-medium cursor-pointer"
-                      whileHover={{
-                        color: "#A855F7",
-                        textShadow: "0 0 8px rgba(139, 92, 246, 0.5)"
-                      }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {exp.technologies.join(' · ')}
-                    </motion.span>
+                    <div className="flex flex-wrap gap-1 md:gap-2">
+                      <span className="text-[#8B5CF6] font-medium mr-1">Tech:</span>
+                      {exp.technologies.map((tech, techIndex) => (
+                        <motion.span
+                          key={tech}
+                          className="text-gray-300 hover:text-[#8B5CF6] transition-colors duration-200 cursor-pointer"
+                          whileHover={{
+                            color: "#A855F7",
+                            textShadow: "0 0 8px rgba(139, 92, 246, 0.5)"
+                          }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {tech}
+                          {techIndex < exp.technologies.length - 1 && (
+                            <span className="mx-1 text-gray-500">·</span>
+                          )}
+                        </motion.span>
+                      ))}
+                    </div>
                   </motion.div>
                 </motion.div>
               </motion.div>

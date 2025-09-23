@@ -61,45 +61,43 @@ const Navbar = () => {
       }, 300)
     }
 
+    // If we're already on the home page, just scroll to the section
     if (location.pathname === '/' && path === '/') {
-      // Same page navigation with enhanced smooth scrolling
-      const element = document.getElementById(sectionId)
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-          inline: 'nearest'
-        })
-      }
-    } else if (location.pathname === '/' && path !== '/') {
-      // Navigate to different route from home with transition timing
-      navigate(path)
-    } else if (location.pathname !== '/' && path === '/') {
-      // Navigate back to home with proper timing for page transition
-      navigate('/')
-      setTimeout(() => {
-        const element = document.getElementById(sectionId)
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest'
-          })
-        }
-      }, 600) // Increased delay to sync with enhanced page transition
+      scrollToSection(sectionId)
     } else {
-      // Different route to different route with transition timing
-      navigate(path)
+      // For all other cases, navigate to home page first, then scroll to section
+      // This ensures we can always navigate between sections
+      navigate('/')
+
+      // Always scroll to section after navigation (since we navigate to home)
+      setTimeout(() => scrollToSection(sectionId), 100)
+      setTimeout(() => scrollToSection(sectionId), 300)
+      setTimeout(() => scrollToSection(sectionId), 600)
+    }
+  }
+
+  // Separate function for scrolling to handle timing issues
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerOffset = 80 // Account for fixed navbar
+      const elementPosition = element.offsetTop
+      const offsetPosition = elementPosition - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
   }
 
   const navLinks = [
     { path: '/', sectionId: 'home', label: 'Home' },
-    { path: '/about', sectionId: 'about', label: 'About' },
-    { path: '/experience', sectionId: 'experience', label: 'Experience' },
-    { path: '/skills', sectionId: 'skills', label: 'Skills' },
-    { path: '/projects', sectionId: 'projects', label: 'Projects' },
-    { path: '/contact', sectionId: 'contact', label: 'Contact' }
+    { path: '/', sectionId: 'about', label: 'About' },
+    { path: '/', sectionId: 'experience', label: 'Experience' },
+    { path: '/', sectionId: 'skills', label: 'Skills' },
+    { path: '/', sectionId: 'projects', label: 'Projects' },
+    { path: '/', sectionId: 'contact', label: 'Contact' }
   ]
 
   return (
@@ -134,7 +132,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((item) => (
               <motion.button
-                key={item.path}
+                key={item.sectionId}
                 onClick={() => handleNavigation(item.path, item.sectionId)}
                 className="relative px-3 py-2 transition-colors duration-300 group"
                 whileHover={{ scale: 1.05 }}
@@ -206,7 +204,7 @@ const Navbar = () => {
         >
           {navLinks.map((item) => (
             <motion.button
-              key={item.path}
+              key={item.sectionId}
               onClick={() => handleNavigation(item.path, item.sectionId)}
               className="block w-full text-left px-4 py-3 rounded-md relative overflow-hidden"
               whileHover={{ x: 5 }}
