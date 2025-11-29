@@ -6,15 +6,13 @@ import { OrbitControls, Float, Text, Sphere, Box, Torus, Ring, Octahedron, Icosa
 import * as THREE from 'three'
 
 const Hero = () => {
-  // Section reveal animation
+  const [isClient, setIsClient] = useState(false)
+
+  // Ensure component is mounted on client
   useEffect(() => {
-    const section = document.getElementById('home')
-    if (section) {
-      setTimeout(() => {
-        section.classList.add('revealed')
-      }, 100)
-    }
+    setIsClient(true)
   }, [])
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -414,25 +412,27 @@ const Hero = () => {
   }
 
   return (
-    <section id="home" className="pt-0 relative overflow-hidden min-h-screen flex flex-col justify-center section-reveal">
+    <section id="home" className="pt-0 relative overflow-hidden min-h-screen flex flex-col justify-center">
       {/* 3D Canvas Background */}
       <div className="absolute inset-0">
-        <Canvas
-          camera={{ position: [0, 0, 5], fov: 75 }}
-          style={{ background: 'transparent' }}
-        >
-          <Suspense fallback={null}>
-            <Scene3D />
-          </Suspense>
-          <OrbitControls 
-            enableZoom={false} 
-            enablePan={false} 
-            autoRotate 
-            autoRotateSpeed={0.5}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-        </Canvas>
+        {isClient && (
+          <Canvas
+            camera={{ position: [0, 0, 5], fov: 75 }}
+            style={{ background: 'transparent' }}
+          >
+            <Suspense fallback={null}>
+              <Scene3D />
+            </Suspense>
+            <OrbitControls 
+              enableZoom={false} 
+              enablePan={false} 
+              autoRotate 
+              autoRotateSpeed={0.5}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+            />
+          </Canvas>
+        )}
       </div>
 
       {/* Updated background with new color scheme */}
@@ -479,23 +479,25 @@ const Hero = () => {
             className="mt-3 max-w-md mx-auto text-base sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
             variants={itemVariants}
           >
-            <TypeAnimation
-              sequence={[
-                'Full Stack Developer',
-                1000,
-                'Machine Learning Engineer',
-                1000,
-                'Problem Solver',
-                1000, 
-                'AI Developer',
-                1000,
-              ]}
-              wrapper="div"
-              speed={50}
-              className="text-white font-mono tracking-wider text-xl sm:text-2xl md:text-3xl font-semibold min-h-[1.5em]"
-              repeat={Infinity}
-              cursor={true}
-            />
+            {isClient && (
+              <TypeAnimation
+                sequence={[
+                  'Full Stack Developer',
+                  1000,
+                  'Machine Learning Engineer',
+                  1000,
+                  'Problem Solver',
+                  1000, 
+                  'AI Developer',
+                  1000,
+                ]}
+                wrapper="div"
+                speed={50}
+                className="text-white font-mono tracking-wider text-xl sm:text-2xl md:text-3xl font-semibold min-h-[1.5em]"
+                repeat={Infinity}
+                cursor={true}
+              />
+            )}
           </motion.div>
 
           <motion.p 
@@ -506,20 +508,52 @@ const Hero = () => {
           </motion.p>
 
           <motion.div 
-            className="mt-6 md:mt-10 flex justify-center"
+            className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center"
             variants={itemVariants}
           >
             <motion.a 
               href="#contact" 
-              className="inline-block border border-purple-400 rounded-md text-purple-400 bg-transparent hover:bg-purple-400/10 text-sm font-medium py-3 px-8 transition-all duration-300 transform hover:scale-105 shadow-sm relative overflow-hidden group"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] hover:from-[#A855F7] hover:to-[#8B5CF6] text-white text-base font-semibold rounded-xl shadow-lg hover:shadow-[#8B5CF6]/50 transition-all duration-300 relative overflow-hidden group"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)"
+                y: -3
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10">Get In Touch</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/0 via-purple-400/10 to-purple-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Get In Touch
+              </span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                animate={{
+                  x: ['-100%', '100%']
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            </motion.a>
+            
+            <motion.a 
+              href="#projects" 
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 text-gray-300 hover:text-white text-base font-semibold rounded-xl border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/40 transition-all duration-300 shadow-lg"
+              whileHover={{ 
+                scale: 1.05,
+                y: -3
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                View Projects
+              </span>
             </motion.a>
           </motion.div>
         </motion.div>

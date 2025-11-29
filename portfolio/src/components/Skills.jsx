@@ -59,8 +59,43 @@ const skillVariants = {
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-slate-900 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 relative overflow-hidden">
+      {/* Enhanced Background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(circle at center, #111827, #0c0c1d)'
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1]/8 via-transparent to-[#A855F7]/8" />
+      
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-20 left-10 w-64 h-64 bg-[#6366F1]/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-64 h-64 bg-[#A855F7]/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.5, 0.3, 0.5]
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           className="text-center mb-16"
@@ -72,42 +107,87 @@ const Skills = () => {
           <h2 className="text-4xl font-bold text-white mb-4">
             Skills & <span className="bg-gradient-to-r from-[#6366F1] to-[#A855F7] bg-clip-text text-transparent">Technologies</span>
           </h2>
-          <div className="w-24 h-1 bg-[#8B5CF6] mx-auto rounded-full"></div>
+          <motion.div
+            className="w-24 h-1 bg-[#8B5CF6] mx-auto rounded-full"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+          />
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Technologies and tools I work with to build exceptional digital experiences
+          </p>
         </motion.div>
 
         {/* Skills Grid */}
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}>
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-purple-500/30 transition-colors duration-300"
+              className="group relative"
               variants={categoryVariants}
             >
-              {/* Category Title */}
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">
-                {category.title}
-              </h3>
+              {/* Gradient border effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#6366F1] to-[#A855F7] rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+              
+              <div className="relative bg-gradient-to-br from-[#1a1a2e]/90 via-[#16213e]/90 to-[#0f1419]/90 backdrop-blur-xl rounded-2xl p-6 lg:p-8 border border-[#6366F1]/20 hover:border-[#8B5CF6]/50 transition-all duration-500 shadow-2xl h-full">
+                {/* Subtle corner accent */}
+                <motion.div
+                  className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#8B5CF6]/10 to-transparent rounded-bl-full"
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
 
-              {/* Skills List */}
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
+                {/* Category Title */}
+                <div className="relative z-10 mb-6">
+                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#6366F1] group-hover:to-[#A855F7] group-hover:bg-clip-text transition-all duration-300">
+                    {category.title}
+                  </h3>
                   <motion.div
-                    key={skill.name}
-                    className="flex items-center p-4 rounded-lg hover:bg-white/5 transition-colors duration-200"
-                    variants={skillVariants}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    {/* Skill Icon and Name */}
-                    <div className="flex items-center space-x-3">
-                      <motion.div className="text-purple-400" whileHover={{ scale: 1.15 }} transition={{ type: 'spring', stiffness: 300 }}>
-                        {skill.icon}
+                    className="h-0.5 bg-gradient-to-r from-[#6366F1] to-transparent rounded-full"
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  />
+                </div>
+
+                {/* Skills List */}
+                <div className="space-y-3 relative z-10">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill.name}
+                      className="relative group/skill"
+                      variants={skillVariants}
+                    >
+                      <motion.div
+                        className="flex items-center gap-3 p-3 lg:p-4 rounded-xl bg-[#8B5CF6]/5 hover:bg-[#8B5CF6]/10 border border-transparent hover:border-[#8B5CF6]/30 transition-all duration-300 cursor-pointer"
+                        whileHover={{ x: 5, scale: 1.02 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      >
+                        {/* Skill Icon */}
+                        <motion.div
+                          className="flex-shrink-0 w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#8B5CF6]/20 to-[#6366F1]/20 text-[#A855F7] group-hover/skill:from-[#8B5CF6]/30 group-hover/skill:to-[#6366F1]/30 group-hover/skill:shadow-lg group-hover/skill:shadow-[#8B5CF6]/30 transition-all duration-300"
+                          whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          {skill.icon}
+                        </motion.div>
+
+                        {/* Skill Name */}
+                        <span className="text-gray-300 font-medium text-sm lg:text-base group-hover/skill:text-white transition-colors duration-200 flex-1">
+                          {skill.name}
+                        </span>
                       </motion.div>
-                      <span className="text-gray-300 font-medium">
-                        {skill.name}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
